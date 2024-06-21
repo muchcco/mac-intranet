@@ -1,0 +1,130 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    max-width: 100%;
+    justify-content: flex-end;
+    align-items: center;    
+    min-height: 100vh;
+    padding-right: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(32, 23, 23, 0.1);
+    padding: 30px;
+    width: 400px;
+    text-align: center;
+}
+
+.card h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+
+.card button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.card button:hover {
+    background-color: #0069d9;
+}
+
+.card p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.card a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+.card .logo {
+    width: 200px;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.card .captcha {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.card .captcha img {
+    width: 100px;
+    height: 40px;
+}
+
+.card .captcha span {
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+.card .terms {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card .terms input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.card .terms label {
+    font-size: 14px;
+    text-align: left !important; 
+}
+
+.label-text{
+    text-align: left !important; 
+    width: 100%;
+}
+
+.card .actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card .actions button {
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+.card .actions button.secondary {
+    background-color: #6c757d;
+}
+
+.card .actions button.secondary:hover {
+    background-color: #5a6268;
+}
+
+.card .info {
+    margin-top: 20px;
+    font-size: 12px;
+    color: #666;
+}

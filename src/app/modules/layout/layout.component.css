@@ -1,0 +1,12 @@
+#body{
+    display: flex;
+
+}
+
+#principal{
+    width: 100%;
+}
+
+.contenido-principal{
+    padding: 2em;
+}

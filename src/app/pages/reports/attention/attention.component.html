@@ -1,0 +1,122 @@
+<ngx-spinner
+  bdColor="rgba(51, 51, 51, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-atom"
+  [fullScreen]="true"  
+>
+  <p class="spli-cargando">{{ loadingPercentage }}% Cargando...</p>
+</ngx-spinner>
+
+<div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        FILTROS DE BÚSQUEDA
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="mb-3">Fecha Inicio:</label>
+              <input type="date" name="fecha_inicio" [(ngModel)]="fecha_inicio" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="mb-3">Fecha Fin:</label>
+              <input type="date" name="fecha_fin" [(ngModel)]="fecha_fin" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="mb-3">Centro MAC:</label>
+              <select name="nom_mac" [(ngModel)]="nom_mac" class="form-select">
+                <option value="">Todos</option>
+                <option *ngFor="let centro of centrosMac" [value]="centro.Nom_Mac">{{ centro.Nom_Mac }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label class="mb-3">Entidad:</label>
+              <select name="nom_mac" [(ngModel)]="servicio" class="form-select">
+                <option value="">Todos</option>
+                <option *ngFor="let servicio of servicios" [value]="servicio.ide_ent">{{ servicio.nom_ent }}</option>
+              </select>              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary mx-2" (click)="buscar()" [disabled]="loadingService.loading$ | async">Buscar</button>
+        <button class="btn btn-secondary " (click)="limpiar()">Limpiar</button>
+        <button class="btn btn-success mx-2" (click)="exportToExcel()" [disabled]="loadingService.loading$ | async">Exportar</button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        RESULTADOS
+      </div>
+      <div class="card-body">
+        <div class="table table-responsive table-hover" id="table_data">
+            <table *ngIf="resultados && resultados.length > 0" class="table table-responsive table-hover">
+                <thead class="table-dark">
+                  <tr>
+                    <!-- Define los encabezados de tu tabla aquí -->
+                    <th>CENTRO MAC</th>
+                    <th>ENTIDAD</th>
+                    <th>HORA LLEGADA</th>
+                    <th>HORA LLAMADO</th>
+                    <th>TIEMPO ESPERA</th>
+                    <th>HORA INICIO</th>
+                    <th>TIEMPO ATENCION</th>
+                    <th>FIN DE ATENCION</th>
+                    <th>TIEMPO TOTAL</th>
+                    <th>NUMERO DE TICKET</th>
+                    <th>ESTADO ATENCION</th>
+                    <th>FECHA DE ATENCION</th>
+                    <th>CANAL DE ATENCION</th>
+                    <th>TIPO DE ATENCION</th>
+                    <!-- Más columnas si es necesario -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of resultados | paginate: { itemsPerPage: pageSize, currentPage: page }">
+                    <td>{{ item.Nom_mac }}</td>
+                    <td>{{ item.nom_ent }}</td>
+                    <td>{{ item.Hra_llg }}</td>
+                    <td>{{ item.Hra_lla }}</td>
+                    <td>{{ item.Tpo_esp }}</td>
+                    <td>{{ item.Hra_ini }}</td>
+                    <td>{{ item.Tpo_ate }}</td>
+                    <td>{{ item.Fin_ate }}</td>
+                    <td>{{ item.Tpo_tot }}</td>
+                    <td>{{ item.Num_tik }}</td>
+                    <td>{{ item.Est_ate }}</td>
+                    <td>{{ item.Fec_ate }}</td>
+                    <td>{{ item.presencial }}</td>
+                    <td>{{ item.TIPO_aTE }}</td>
+                    <!-- Más celdas si es necesario -->
+                  </tr>
+                </tbody>
+              </table>
+              <p *ngIf="resultados.length === 0">Sin resultado en la búsqueda...</p>
+              <pagination-controls *ngIf="resultados.length > 0" (pageChange)="page = $event">
+                <ng-template ngx-pagination-template let-model="model">
+                  <div class="ngx-pagination">
+                    <a class="btn btn-secondary" [class.disabled]="model.currentPage === 1" (click)="model.setCurrent(model.currentPage - 1)">Anterior</a>
+                    <span class="current">Página {{ model.currentPage }} de {{ model.totalPages }}</span>
+                    <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
+                  </div>
+                </ng-template>
+              </pagination-controls>
+              
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  

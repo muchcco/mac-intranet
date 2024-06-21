@@ -1,0 +1,29 @@
+/* styles.css o styles.scss */
+.ng-select.custom-select .ng-select-container {
+  background-color: white !important;
+  border-color: #ced4da !important;
+  border-radius: 0.25rem;
+}
+
+.ng-select.custom-select .ng-dropdown-panel {
+  background-color: white !important;
+  border-color: #ced4da !important;
+}
+
+.ng-select.custom-select .ng-option {
+  background-color: white !important;
+  color: black;
+}
+
+.ng-select.custom-select .ng-option:hover {
+  background-color: #e9ecef !important;
+}
+
+.custom-select {
+  color: red;
+}
+
+
+.spli-cargando{
+  color: white; font-size: 1.5rem;
+}

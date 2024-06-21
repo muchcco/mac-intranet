@@ -1,0 +1,15 @@
+.header{
+    padding: 0;
+    margin: 0;
+    max-width: 100%;
+}
+
+.bg-head{
+    background-color: #fff !important;
+    /* border-bottom: 1px solid #000; */
+    box-shadow: 2px 3px 3px 0px rgba(0, 0, 0, 0.33);
+}
+
+.especialista-cam{
+    text-transform: lowercase;
+}

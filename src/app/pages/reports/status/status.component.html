@@ -1,0 +1,102 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true">
+  <p style="color: white" > Cargando... {{ loadingPercentage }}</p>
+</ngx-spinner>
+
+<div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        FILTROS DE BÚSQUEDA
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="mb-3">Fecha Inicio:</label>
+              <input type="date" name="fecha_inicio" [(ngModel)]="fecha_inicio" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group">
+              <label class="mb-3">Fecha Fin:</label>
+              <input type="date" name="fecha_fin" [(ngModel)]="fecha_fin" class="form-control">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="mb-3">Centro MAC:</label>
+              <select name="nom_mac" [(ngModel)]="nom_mac" class="form-select">
+                <option value="">Todos</option>
+                <option *ngFor="let centro of centrosMac" [value]="centro.Nom_Mac">{{ centro.Nom_Mac }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary mx-2" (click)="buscar()" [disabled]="loadingService.loading$ | async">Buscar</button>
+        <button class="btn btn-secondary " (click)="limpiar()">Limpiar</button>
+        <button class="btn btn-success mx-2" (click)="exportToExcel()" [disabled]="loadingService.loading$ | async">Exportar</button>
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        RESULTADOS
+      </div>
+      <div class="card-body">
+        <div class="table table-responsive table-hover" id="table_data">
+            <table *ngIf="resultados && resultados.length > 0" class="table table-responsive table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th rowspan="2">N°</th>
+                        <th rowspan="2">CENTRO MAC</th>
+                        <th rowspan="2">TOTAL</th>
+                        <th colspan="8">ESTADOS</th>
+                    </tr>
+                    <tr>        
+                        <th>TERMINADO</th>
+                        <th>ABANDONO</th>
+                        <th>LLAMANDO</th>
+                        <th>CANCELADO</th>
+                        <th>ATENCIÓN CERRADA</th>
+                        <th>EN ESPERA</th>
+                        <th>ERROR DE SELECCION</th>
+                        <th>ATENCIÓN INICIADA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of resultados | paginate: { itemsPerPage: pageSize, currentPage: page }; let i = index">                     
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ item.Nom_mac }}</td>
+                    <td>{{ item.TotalRegistros }}</td>
+                    <td>{{ item.Abandono }}</td>
+                    <td>{{ item.Llamando }}</td>
+                    <td>{{ item.Cancelado }}</td>
+                    <td>{{ item.Atencion_Cerrada }}</td>
+                    <td>{{ item.En_espera }}</td>
+                    <td>{{ item.Error_de_seleccion }}</td>
+                    <td>{{ item.Terminado }}</td>
+                    <td>{{ item.Atencion_Iniciada }}</td>
+                    <!-- Más celdas si es necesario -->
+                  </tr>
+                </tbody>
+              </table>
+              <p *ngIf="resultados.length === 0">Sin resultado en la búsqueda...</p>
+              <pagination-controls *ngIf="resultados.length > 0" (pageChange)="page = $event">
+                <ng-template ngx-pagination-template let-model="model">
+                  <div class="ngx-pagination">
+                    <a class="btn btn-secondary" [class.disabled]="model.currentPage === 1" (click)="model.setCurrent(model.currentPage - 1)">Anterior</a>
+                    <span class="current">Página {{ model.currentPage }} de {{ model.totalPages }}</span>
+                    <a class="btn btn-secondary" [class.disabled]="model.currentPage === model.totalPages" (click)="model.setCurrent(model.currentPage + 1)">Siguiente</a>
+                  </div>
+                </ng-template>
+              </pagination-controls>
+              
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
