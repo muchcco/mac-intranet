@@ -17,13 +17,15 @@ export class AuthService {
       tap(response => {
         // Almacenar el token de acceso en localStorage
         localStorage.setItem('access_token', response.data.access_token);
+        localStorage.setItem('name', name);
       })
     );
   }
 
   logout(): Observable<any> {
-    // Eliminar el token de acceso del localStorage
+    // Eliminar el token y el nombre de usuario de acceso del localStorage
     localStorage.removeItem('access_token');
+    localStorage.removeItem('name');
     this.router.navigate(['/login']);
     return this.http.post<any>(`${this.apiUrl}/logout`, {}); // Llamar al endpoint de logout en el backend
   }

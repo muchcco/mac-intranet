@@ -49,6 +49,11 @@ export class LoginComponent implements OnInit {
         alert('Error al validar las URLs de la API');
       }
     );
+
+    // Establecer la imagen de fondo aleatoria
+    const randomImageUrl = 'assets/img/auth/' + this.getRandomImage();
+    // document.body.style.backgroundImage = 'url(' + randomImageUrl + ')';
+    document.documentElement.style.setProperty('--random-image', 'url(' + randomImageUrl + ')');
   }
 
   openModal() {
@@ -105,9 +110,21 @@ export class LoginComponent implements OnInit {
         error => {
           this.errorMessage = error.error.message;
           this.showProfileSelect = false;
+          console.log(this.errorMessage)
         }
       );
     }
+  }
+
+  getRandomImage(): string {
+    const images = [
+      'anden.jpg',
+      'arequipa.jpg',
+      'lima-barranco.jpg',
+      // Agrega aquí el nombre de todas tus imágenes en la carpeta assets/img/auth
+    ];
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex];
   }
 
   onNameChange(): void {

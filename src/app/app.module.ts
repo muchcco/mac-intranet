@@ -14,14 +14,15 @@ import { ConnectionValidationModalComponent } from './validations/connection-val
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoginComponent } from './login/login/login.component';
-// import { DashboardComponent } from './modules/reports/dashboard/dashboard.component'; // Importa tu módulo de enrutamiento
+import { ErrorInterceptor } from './_helpers/error-interceptor.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SharedComponent,
-    ConnectionValidationModalComponent
+    ConnectionValidationModalComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -37,6 +38,11 @@ import { LoginComponent } from './login/login/login.component';
   providers: [
     {
       provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
     },
     ApiService,
     provideHttpClient(withFetch())

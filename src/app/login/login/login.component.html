@@ -9,9 +9,29 @@
 </ng-template>
 
 <div class="container">
+  <div class="log-div">
+    <span class="texto-informativo">
+      <h2>Sistema de autenticación de la plataforma MAC</h2>
+      <p>Algunas sugerencias antes de ingresar!</p>
+      <p id="text-mac">Mac Rapidos, Mac Eficientes, Mac fácil ...</p>
+      <p>Módulos Externos:</p>
+      <ul>
+          <li>Cumpleaños <strong>(Dar clic <a href="">Aqui</a> )</strong> </li>
+      </ul>
+      <p>Se recomienda utilizar los siguientes navegadores</p>
+      <div>
+        <i class="fa-brands fa-chrome logo-icono-info"></i>
+        <i class="fa-brands fa-firefox-browser logo-icono-info"></i>
+        <i class="fa-brands fa-opera logo-icono-info"></i>
+      </div>
+  </span>
+  </div>
+  <div class="log-div">
     <div class="card">
       <img src="assets/img/mac-general.png" alt="MAC Logo" class="logo">
-      <h1>Ingrese al sistema</h1>
+      <!-- <h1>Ingrese al sistema</h1> -->
+       <hr>
+       <br />
       <form (submit)="login()">
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">
@@ -19,14 +39,14 @@
           </span>
           <input type="text" id="name" [(ngModel)]="name" name="name" required (change)="onNameChange()" placeholder="Nombre de Usuario" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
         </div> 
-  
+
         <div class="input-group mb-3">
           <span class="input-group-text" id="basic-addon1">
             <i class="fas fa-lock"></i>
           </span>
           <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="Contraseña" class="form-control" aria-label="Password" aria-describedby="basic-addon1">
         </div>
-  
+
         <div class="mb-3" *ngIf="showProfileSelect">
           <label for="profile" class="form-label label-text">Seleccionar Perfil</label>
           <select id="profile" [(ngModel)]="selectedProfileId" name="profile" required class="form-select" aria-label="Default select example">
@@ -34,24 +54,27 @@
             <option *ngFor="let profile of profiles" [value]="profile.id">{{ profile.description }}</option>
           </select>
         </div>
-  
+
         <div *ngIf="errorMessage" class="error">
           <div class="alert alert-danger" role="alert">
             {{ errorMessage }}
           </div>          
         </div>
-  
+
         <div class="terms">
           <input type="checkbox" id="terms" required>
           <label for="terms">Aceptar los términos y condiciones</label>
         </div>
-  
+
         <button id="login-btn" type="submit" [disabled]="isLoading">
           INGRESAR
           <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         </button>
-  
+
       </form>
     </div>
   </div>
+  
+  
+</div>
   

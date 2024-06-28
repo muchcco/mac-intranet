@@ -18,7 +18,7 @@ export class ApiService {
       const cachedUrl = localStorage.getItem('apiUrl');
       if (cachedUrl) {
         this.apiUrl = cachedUrl;
-        console.log(`Using cached API URL: ${this.apiUrl}`);
+        // console.log(`Using cached API URL: ${this.apiUrl}`);
       }
     } else {
       this.apiUrl = this.primaryApiUrl;
@@ -30,7 +30,7 @@ export class ApiService {
       return of(undefined);
     }
 
-    console.log('Checking primary API URL...');
+    // console.log('Checking primary API URL...');
     return this.checkApiUrlAvailability(this.primaryApiUrl).pipe(
       switchMap(available => available ? of(this.primaryApiUrl) : this.checkApiUrlAvailability(this.secondaryApiUrl).pipe(
         map(innerAvailable => innerAvailable ? this.secondaryApiUrl : this.primaryApiUrl)
@@ -38,7 +38,7 @@ export class ApiService {
       tap(selectedUrl => {
         this.apiUrl = selectedUrl;
         localStorage.setItem('apiUrl', this.apiUrl);
-        console.log(`Using API URL: ${this.apiUrl}`);
+        // console.log(`Using API URL: ${this.apiUrl}`);
       }),
       map(() => undefined)
     );

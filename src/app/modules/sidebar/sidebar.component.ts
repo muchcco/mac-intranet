@@ -26,7 +26,7 @@ export class SidebarComponent {
           if (response.status === 1) {
             this.userName = response.data.datos_com.NOMBREU;
             this.cargo = response.data.datos_com.CARGO;
-            // console.log(this.cargo);
+            console.log(this.cargo);
           } else {
             console.error('Error al obtener datos del usuario', response.message);
           }
