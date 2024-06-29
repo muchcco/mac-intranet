@@ -76,6 +76,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('access_token', response.data.access_token);
           if(this.selectedProfileId == '2'){
             this.router.navigate(['/reports']);
+          }else if(this.selectedProfileId == '4'){
+            this.router.navigate(['/administrator']);
           }
         } else {
           this.errorMessage = response.message;

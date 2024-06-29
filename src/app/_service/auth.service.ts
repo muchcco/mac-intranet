@@ -15,9 +15,10 @@ export class AuthService {
   login(name: string, password: string, idPerfil: string): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, { name, password, id_perfil: idPerfil }).pipe(
       tap(response => {
-        // Almacenar el token de acceso en localStorage
+        // Almacenar el token de acceso en localStorage        
         localStorage.setItem('access_token', response.data.access_token);
         localStorage.setItem('name', name);
+        localStorage.setItem('idPerfil', idPerfil);
       })
     );
   }
